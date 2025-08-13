@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,7 +11,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
+  final List<String> options=["الاذكار","مواقيت الصلاة","المصحف","المصحف","القبلة","المهام اليومية"];
   final List<bool> _tasks = [false, false, false, false, false];
 
   void _onNavTap(int index) {
@@ -71,16 +74,16 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(15),
                   color: const Color(0xFF152D45),
                 ),
-                child: Row(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (_) => const DailyVersePage()),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (_) => const DailyVersePage()),
+                          // );
                         },
                         child: const Text(
                           "سورة البقرة، آية 100\n"
@@ -90,14 +93,17 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    IconButton(
-                      icon: const Icon(Icons.arrow_forward_ios, color: Colors.white),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const DailyVersePage()),
-                        );
-                      },
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: IconButton(
+                        icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+                        onPressed: () {
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (_) => const DailyVersePage()),
+                          // );
+                        },
+                      ),
                     ),
                   ],
                 ),
@@ -118,6 +124,7 @@ class _HomePageState extends State<HomePage> {
 
               // Second container with arrow
               Container(
+                height: 220,
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
@@ -128,11 +135,54 @@ class _HomePageState extends State<HomePage> {
                     _buildTaskItem("أذكار الصباح", 0),
                     _buildTaskItem("الورد اليومى", 1),
                     _buildTaskItem("أذكار المساء", 2),
-                    _buildTaskItem("صدقة", 3),
-                    _buildTaskItem("الصلاة", 4),
+
+                        Align(
+                          alignment: Alignment.bottomLeft,
+                          child: IconButton(
+                            icon: const Icon(Icons.arrow_back_ios, color: Colors.white, ),
+                            onPressed: () {
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(builder: (_) => const TaskDetailsPage()),
+                              // );
+                            },
+                          ),
+                        ),
+
                   ],
                 ),
               ),
+              const SizedBox(height: 20),
+              const Text(
+                "الانشطة",
+                style: TextStyle(
+                  fontFamily: 'Inter',
+                  color: Color(0xFFCB3526),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+                textAlign: TextAlign.right,
+              ),
+              SizedBox(height: 10,),
+              SizedBox(
+                height: 1000,
+                  child: GridView.builder(
+                      itemCount: options.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 10,crossAxisSpacing: 16),
+                      itemBuilder: (context,index){
+                        return Container(
+                          height:50,
+                          width: 166,
+                          decoration: BoxDecoration(
+                              color: const Color(0xFF152D45),
+                              borderRadius: BorderRadius.circular(15)
+                          ),
+                          child: Center(child: Text(options[index],style: TextStyle(fontFamily: "B Fantezy",color: Colors.white,fontSize: 30),)),
+                        );
+                      }
+
+                  )
+              )
             ],
           ),
         ),
@@ -167,19 +217,9 @@ class _HomePageState extends State<HomePage> {
 
   // Right-aligned checkbox + text
   Widget _buildTaskItem(String title, int index) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        IconButton(
-          icon: const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const TaskDetailsPage()),
-            );
-          },
-        ),
-        Row(
+    //     ),
+    return    Row(
+      mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Text(title, style: const TextStyle(color: Colors.white)),
             Checkbox(
@@ -192,41 +232,9 @@ class _HomePageState extends State<HomePage> {
               activeColor: const Color(0xFFCB3526),
             ),
           ],
-        ),
-      ],
+
     );
   }
 }
 
-class DailyVersePage extends StatelessWidget {
-  const DailyVersePage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFE7E0D0),
-      appBar: AppBar(
-        title: const Text("الورد اليومى"),
-        backgroundColor: const Color(0xFF152D45),
-      ),
-      body: const Center(
-        child: Text(
-          "هنا تفاصيل الورد اليومى",
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
-    );
-  }
-}
-
-class TaskDetailsPage extends StatelessWidget {
-  const TaskDetailsPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("تفاصيل المهمة")),
-      body: const Center(child: Text("صفحة تفاصيل المهمة")),
-    );
-  }
-}
