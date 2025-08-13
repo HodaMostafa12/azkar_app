@@ -25,6 +25,10 @@ class MyApp extends StatelessWidget {
           create: (_) => SebhaViewModel(),
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: ThemeMode.system,
             home: child,
           ),
         );
