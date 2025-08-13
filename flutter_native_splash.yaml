@@ -2,7 +2,7 @@ flutter_native_splash:
   color: "#E7E0D0"               
   color_dark: "#0C141A"          
 
-  image: assets/images/logo_light_1024.png
+  image: assets\images\logo_light_1024 (2).png
   image_dark: assets/images/logo_dark_1024.png
 
   android_gravity: center
@@ -13,7 +13,7 @@ flutter_native_splash:
   android_12:
     color: "#E7E0D0"
     color_dark: "#0C141A"
-    image: assets/images/logo_light_1024.png
+    image: assets\images\logo_light_1024 (2).png
     image_dark: assets/images/logo_dark_1024.png
     icon_background_color: "#E7E0D0"
     icon_background_color_dark: "#0C141A"

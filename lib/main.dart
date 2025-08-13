@@ -1,4 +1,6 @@
-import 'package:azkar_app/view/home_page.dart';
+
+import 'package:azkar_app/theme/app_theme.dart';
+import 'package:azkar_app/view/home_screen/home_page.dart';
 import 'package:azkar_app/view/login_screan.dart';
 import 'package:flutter/material.dart';
 
@@ -14,11 +16,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.system,
       home: HomePage()
     );
   }

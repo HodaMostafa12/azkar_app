@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,7 +10,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 2;
-  final List<String> options=["الاذكار","مواقيت الصلاة","المصحف","المصحف","القبلة","المهام اليومية"];
+  final List<String> options = ["الاذكار", "مواقيت الصلاة", "المصحف", "المصحف", "القبلة", "المهام اليومية"];
   final List<bool> _tasks = [false, false, false, false, false];
 
   void _onNavTap(int index) {
@@ -23,26 +21,32 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme; // الألوان من الثيم
+    final textTheme = Theme.of(context).textTheme; // النصوص من الثيم
+
     return Scaffold(
-      backgroundColor: const Color(0xFFE7E0D0),
+      backgroundColor: colors.background,
       appBar: AppBar(
         toolbarHeight: 100,
-        backgroundColor: const Color(0xFFE7E0D0),
+        backgroundColor: colors.background,
         centerTitle: true,
         elevation: 0,
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
           child: CircleAvatar(
             radius: 26,
-            backgroundColor: const Color(0xFF162F43),
-            child: const Text("R", style: TextStyle(color: Colors.white)),
+            backgroundColor: colors.primary,
+            child: Text(
+              "R",
+              style: textTheme.bodyLarge?.copyWith(color: colors.onPrimary),
+            ),
           ),
         ),
         title: SizedBox(
           height: 80,
           width: 140,
           child: SvgPicture.asset(
-            "assets/images/fzkrAppBar.svg",
+            "assets/icons/fzkrAppBar.svg",
             fit: BoxFit.contain,
           ),
         ),
@@ -54,41 +58,34 @@ class _HomePageState extends State<HomePage> {
           child: ListView(
             children: [
               const SizedBox(height: 10),
-              const Text(
+              Text(
                 "الورد اليومى",
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  color: Color(0xFFCB3526),
+                style: textTheme.titleMedium?.copyWith(
+                  color: colors.error,
                   fontWeight: FontWeight.bold,
-                  fontSize: 18,
                 ),
                 textAlign: TextAlign.right,
               ),
               const SizedBox(height: 10),
 
-              // First container with arrow
+              // First container
               Container(
                 padding: const EdgeInsets.all(16),
                 height: 120,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: const Color(0xFF152D45),
+                  color: colors.primary,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
                       child: GestureDetector(
-                        onTap: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (_) => const DailyVersePage()),
-                          // );
-                        },
-                        child: const Text(
+                        onTap: () {},
+                        child: Text(
                           "سورة البقرة، آية 100\n"
-                              "أَوَكُلَّمَا عَاهَدُوا عَهْدًا نَّبَذَهُ فَرِيقٌ مِّنْهُم...",
-                          style: TextStyle(color: Colors.white),
+                          "أَوَكُلَّمَا عَاهَدُوا عَهْدًا نَّبَذَهُ فَرِيقٌ مِّنْهُم...",
+                          style: textTheme.bodyMedium?.copyWith(color: colors.onPrimary),
                           textAlign: TextAlign.right,
                         ),
                       ),
@@ -96,13 +93,8 @@ class _HomePageState extends State<HomePage> {
                     Align(
                       alignment: Alignment.bottomLeft,
                       child: IconButton(
-                        icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
-                        onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (_) => const DailyVersePage()),
-                          // );
-                        },
+                        icon: Icon(Icons.arrow_back_ios, color: colors.error),
+                        onPressed: () {},
                       ),
                     ),
                   ],
@@ -110,79 +102,78 @@ class _HomePageState extends State<HomePage> {
               ),
 
               const SizedBox(height: 20),
-              const Text(
+              Text(
                 "المهام اليومية",
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  color: Color(0xFFCB3526),
+                style: textTheme.titleMedium?.copyWith(
+                  color: colors.error,
                   fontWeight: FontWeight.bold,
-                  fontSize: 18,
                 ),
                 textAlign: TextAlign.right,
               ),
               const SizedBox(height: 10),
 
-              // Second container with arrow
+              // Second container
               Container(
                 height: 220,
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: const Color(0xFF155F5E),
+                  color: colors.secondary,
                 ),
                 child: Column(
                   children: [
-                    _buildTaskItem("أذكار الصباح", 0),
-                    _buildTaskItem("الورد اليومى", 1),
-                    _buildTaskItem("أذكار المساء", 2),
-
-                        Align(
-                          alignment: Alignment.bottomLeft,
-                          child: IconButton(
-                            icon: const Icon(Icons.arrow_back_ios, color: Colors.white, ),
-                            onPressed: () {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(builder: (_) => const TaskDetailsPage()),
-                              // );
-                            },
-                          ),
-                        ),
-
+                    _buildTaskItem("أذكار الصباح", 0, colors, textTheme),
+                    _buildTaskItem("الورد اليومى", 1, colors, textTheme),
+                    _buildTaskItem("أذكار المساء", 2, colors, textTheme),
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: IconButton(
+                        icon: Icon(Icons.arrow_back_ios, color: colors.error),
+                        onPressed: () {},
+                      ),
+                    ),
                   ],
                 ),
               ),
+
               const SizedBox(height: 20),
-              const Text(
+              Text(
                 "الانشطة",
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  color: Color(0xFFCB3526),
+                style: textTheme.titleMedium?.copyWith(
+                  color: colors.error,
                   fontWeight: FontWeight.bold,
-                  fontSize: 18,
                 ),
                 textAlign: TextAlign.right,
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10),
               SizedBox(
                 height: 1000,
-                  child: GridView.builder(
-                      itemCount: options.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 10,crossAxisSpacing: 16),
-                      itemBuilder: (context,index){
-                        return Container(
-                          height:50,
-                          width: 166,
-                          decoration: BoxDecoration(
-                              color: const Color(0xFF152D45),
-                              borderRadius: BorderRadius.circular(15)
+                child: GridView.builder(
+                  itemCount: options.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 16,
+                  ),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: colors.primary,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Center(
+                        child: Text(
+                          options[index],
+                          style: textTheme.bodyLarge?.copyWith(
+                            color: colors.onPrimary,
+                            fontSize: 30,
                           ),
-                          child: Center(child: Text(options[index],style: TextStyle(fontFamily: "B Fantezy",color: Colors.white,fontSize: 30),)),
-                        );
-                      }
-
-                  )
-              )
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),
@@ -190,9 +181,9 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onNavTap,
-        selectedItemColor: const Color(0xFFCB3526),
+        selectedItemColor: colors.error,
         unselectedItemColor: Colors.grey,
-        backgroundColor: const Color(0xFF152D45),
+        backgroundColor: colors.primary,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
@@ -215,26 +206,21 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // Right-aligned checkbox + text
-  Widget _buildTaskItem(String title, int index) {
-    //     ),
-    return    Row(
+  Widget _buildTaskItem(String title, int index, ColorScheme colors, TextTheme textTheme) {
+    return Row(
       mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Text(title, style: const TextStyle(color: Colors.white)),
-            Checkbox(
-              value: _tasks[index],
-              onChanged: (val) {
-                setState(() {
-                  _tasks[index] = val ?? false;
-                });
-              },
-              activeColor: const Color(0xFFCB3526),
-            ),
-          ],
-
+      children: [
+        Text(title, style: textTheme.bodyMedium?.copyWith(color: colors.onSecondary)),
+        Checkbox(
+          value: _tasks[index],
+          onChanged: (val) {
+            setState(() {
+              _tasks[index] = val ?? false;
+            });
+          },
+          activeColor: Theme.of(context).colorScheme.error,
+        ),
+      ],
     );
   }
 }
-
-
