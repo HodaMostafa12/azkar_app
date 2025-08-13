@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.5.4
+  sdk: '>=3.3.1 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -35,6 +35,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  flutter_svg: ^2.0.10+1
 
 dev_dependencies:
   flutter_native_splash: ^2.4.0
@@ -76,17 +77,17 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/inter/Inter_18pt-Bold.ttf
+        - asset: assets/fonts/inter/Inter_18pt-Regular.ttf
+        - asset: assets/fonts/inter/Inter_28pt-Bold.ttf
+        - asset: assets/fonts/inter/Inter_28pt-Regular.ttf
+          weight: 700
+
+    - family: B Fantezy
+      fonts:
+        - asset: assets/fonts/bfantezy/B-Fantezy.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
