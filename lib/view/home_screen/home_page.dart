@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
               // First container with arrow
               Container(
                 padding: const EdgeInsets.all(16),
-                height: 120,
+                height: 150,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: const Color(0xFF152D45),
@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                         child: const Text(
                           "سورة البقرة، آية 100\n"
                               "أَوَكُلَّمَا عَاهَدُوا عَهْدًا نَّبَذَهُ فَرِيقٌ مِّنْهُم...",
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.white,fontSize:18 ),
                           textAlign: TextAlign.right,
                         ),
                       ),
@@ -96,7 +96,8 @@ class _HomePageState extends State<HomePage> {
                     Align(
                       alignment: Alignment.bottomLeft,
                       child: IconButton(
-                        icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+
+                        icon: const Icon(Icons.arrow_back_ios, color: Color(0xFFCB3526),),
                         onPressed: () {
                           // Navigator.push(
                           //   context,
@@ -139,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                         Align(
                           alignment: Alignment.bottomLeft,
                           child: IconButton(
-                            icon: const Icon(Icons.arrow_back_ios, color: Colors.white, ),
+                            icon: const Icon(Icons.arrow_back_ios, color: Color(0xFFCB3526),),
                             onPressed: () {
                               // Navigator.push(
                               //   context,
@@ -163,21 +164,21 @@ class _HomePageState extends State<HomePage> {
                 ),
                 textAlign: TextAlign.right,
               ),
-              SizedBox(height: 10,),
+          const SizedBox(height: 10,),
               SizedBox(
-                height: 1000,
                   child: GridView.builder(
+                      physics: const NeverScrollableScrollPhysics(), // Disable inner scrolling
+                      shrinkWrap: true,
                       itemCount: options.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 10,crossAxisSpacing: 16),
+                      gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
+                          childAspectRatio: 1.5,
+                          crossAxisCount: 2,mainAxisSpacing: 10,crossAxisSpacing: 16),
                       itemBuilder: (context,index){
-                        return Container(
-                          height:50,
-                          width: 166,
-                          decoration: BoxDecoration(
-                              color: const Color(0xFF152D45),
-                              borderRadius: BorderRadius.circular(15)
+                        return SizedBox(
+                          child: Card(
+                            color: const Color(0xFF152D45),
+                            child: Center(child: Text(options[index],style: TextStyle(fontFamily: "B Fantezy",color: Colors.white,fontSize: 30),)),
                           ),
-                          child: Center(child: Text(options[index],style: TextStyle(fontFamily: "B Fantezy",color: Colors.white,fontSize: 30),)),
                         );
                       }
 
@@ -187,33 +188,51 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onNavTap,
-        selectedItemColor: const Color(0xFFCB3526),
-        unselectedItemColor: Colors.grey,
-        backgroundColor: const Color(0xFF152D45),
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "الإعدادات",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border),
-            label: "المفضلة",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "الرئيسية",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book_outlined),
-            label: "الدروس",
-          ),
-        ],
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(top: 4),
+        child:
+
+    ClipRRect(
+    borderRadius: const BorderRadius.only(
+    topLeft: Radius.circular(30),
+    topRight: Radius.circular(30),
+    ),
+    child:
+        BottomNavigationBar(
+
+          type: BottomNavigationBarType.fixed, // Needed for backgroundColor to work
+          currentIndex: _selectedIndex,
+          onTap: _onNavTap,
+          selectedItemColor: const Color(0xFFCB3526),
+          unselectedItemColor: Colors.grey,
+          backgroundColor: const Color(0xFF152D45),
+          items: [
+            _buildNavItem("assets/icons/settings.svg", "الإعدادات", 0),
+            _buildNavItem("assets/icons/fav.svg", "المفضلة", 1),
+            _buildNavItem("assets/icons/home.svg", "الرئيسية", 2),
+            _buildNavItem("assets/icons/seb7a.svg", "السبحه الالكترونية", 3),
+          ],
+        ),
       ),
+      )
     );
   }
+
+
+  BottomNavigationBarItem _buildNavItem(String assetPath, String label, int index) {
+    return BottomNavigationBarItem(
+      icon: SvgPicture.asset(
+        assetPath,
+        colorFilter: ColorFilter.mode(
+          _selectedIndex == index ? const Color(0xFFCB3526) : Colors.grey,
+          BlendMode.srcIn,
+        ),
+      ),
+      label: label,
+    );
+  }
+
+
 
   // Right-aligned checkbox + text
   Widget _buildTaskItem(String title, int index) {
@@ -229,8 +248,10 @@ class _HomePageState extends State<HomePage> {
                   _tasks[index] = val ?? false;
                 });
               },
-              activeColor: const Color(0xFFCB3526),
-            ),
+              checkColor: Colors.black, // Tick color
+              fillColor: MaterialStateProperty.all(Colors.white), // Background fill color
+              activeColor: const Color(0xFFCB3526), // Outline color when active
+            )
           ],
 
     );
