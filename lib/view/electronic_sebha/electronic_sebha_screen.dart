@@ -9,18 +9,20 @@ class SebhaView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors =Theme.of(context).colorScheme;
+    final textTheme =Theme.of(context).textTheme;
     final viewModel = Provider.of<SebhaViewModel>(context);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFE7E0D0),
+      backgroundColor: colors.background,
       appBar: AppBar(
-        backgroundColor: const Color(0xFFE7E0D0),
+        backgroundColor: colors.background,
         centerTitle: true,
         elevation: 0,
         title: Text(
           "السبحة الالكترونية",
           style: TextStyle(
-            color: const Color(0xFFCB3526),
+            color: colors.error,
             fontWeight: FontWeight.bold,
             fontSize: 30.sp,
             fontFamily: 'Inter',
@@ -30,8 +32,8 @@ class SebhaView extends StatelessWidget {
           preferredSize: Size.fromHeight(1.h),
           child: SizedBox(
             width: 250.w,
-            child: const Divider(
-              color: Color(0xFFCB3526),
+            child:  Divider(
+              color: colors.error,
               thickness: 1,
             ),
           ),
@@ -46,6 +48,7 @@ class SebhaView extends StatelessWidget {
               Text(
                 "العدات",
                 style: TextStyle(
+                  color: colors.primary,
                   fontWeight: FontWeight.bold,
                   fontSize: 25.sp,
                   fontFamily: 'Inter',

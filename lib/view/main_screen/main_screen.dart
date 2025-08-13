@@ -1,5 +1,6 @@
 import 'package:azkar_app/view/home_screen/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
@@ -30,27 +31,32 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors =Theme.of(context).colorScheme;
+    final textTheme =Theme.of(context).textTheme;
     return Scaffold(
-      backgroundColor: const Color(0xFFE7E0D0),
+      backgroundColor: colors.background,
       body: _screens[_selectedIndex],
       bottomNavigationBar: ClipRRect(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(30),
           topRight: Radius.circular(30),
         ),
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          currentIndex: _selectedIndex,
-          onTap: _onNavTap,
-          selectedItemColor: const Color(0xFFCB3526),
-          unselectedItemColor: Colors.grey,
-          backgroundColor: const Color(0xFF152D45),
-          items: [
-            _buildNavItem("assets/icons/settings.svg", "الإعدادات", 0),
-            _buildNavItem("assets/icons/fav.svg", "المفضلة", 1),
-            _buildNavItem("assets/icons/home.svg", "الرئيسية", 2),
-            _buildNavItem("assets/icons/seb7a.svg", "السبحه الالكترونية", 3),
-          ],
+        child: Padding(
+          padding:  EdgeInsets.only(top: 4.h),
+          child: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            currentIndex: _selectedIndex,
+            onTap: _onNavTap,
+            selectedItemColor: colors.error,
+            unselectedItemColor: Colors.grey,
+            backgroundColor: colors.primary,
+            items: [
+              _buildNavItem("assets/icons/settings.svg", "الإعدادات", 0),
+              _buildNavItem("assets/icons/fav.svg", "المفضلة", 1),
+              _buildNavItem("assets/icons/home.svg", "الرئيسية", 2),
+              _buildNavItem("assets/icons/seb7a.svg", "السبحه الالكترونية", 3),
+            ],
+          ),
         ),
       ),
     );

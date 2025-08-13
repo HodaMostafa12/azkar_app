@@ -1,4 +1,6 @@
+import 'package:azkar_app/theme/app_theme.dart';
 import 'package:azkar_app/view/electronic_sebha/electronic_sebha_viewModel/electronic_sebha_viewModel.dart';
+import 'package:azkar_app/view/Authentication/log_in/login_screan.dart';
 import 'package:azkar_app/view/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
           ),
         );
       },
-      child: MainScreen(), // or HomePage
+      child: LoginScreen(), // or HomePage
     );
   }
 }

@@ -29,21 +29,24 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final colors =Theme.of(context).colorScheme;
+    final textTheme =Theme.of(context).textTheme;
+
     return Scaffold(
-      backgroundColor: const Color(0xFFE7E0D0),
+      backgroundColor: colors.background,
       appBar: AppBar(
         toolbarHeight: 100.h,
-        backgroundColor: const Color(0xFFE7E0D0),
+        backgroundColor:colors.background,
         centerTitle: true,
         elevation: 0,
         leading: Padding(
           padding: EdgeInsets.all(8.w),
           child: CircleAvatar(
             radius: 26.r,
-            backgroundColor: const Color(0xFF162F43),
+            backgroundColor: colors.primary,
             child: Text(
               "R",
-              style: TextStyle(color: Colors.white, fontSize: 18.sp),
+              style: TextStyle(color: colors.background, fontSize: 18.sp),
             ),
           ),
         ),
@@ -51,7 +54,7 @@ class _HomePageState extends State<HomePage> {
           height: 80.h,
           width: 140.w,
           child: SvgPicture.asset(
-            "assets/images/fzkrAppBar.svg",
+            "assets/icons/fzkrAppBar.svg",
             fit: BoxFit.contain,
           ),
         ),
@@ -67,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                 "الورد اليومى",
                 style: TextStyle(
                   fontFamily: 'Inter',
-                  color: const Color(0xFFCB3526),
+                  color: colors.error,
                   fontWeight: FontWeight.bold,
                   fontSize: 18.sp,
                 ),
@@ -81,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                 height: 150.h,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.r),
-                  color: const Color(0xFF152D45),
+                  color: colors.primary,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -93,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                           "سورة البقرة، آية 100\n"
                               "أَوَكُلَّمَا عَاهَدُوا عَهْدًا نَّبَذَهُ فَرِيقٌ مِّنْهُم...",
                           style: TextStyle(
-                            color: Colors.white,
+                            color: colors.background,
                             fontSize: 18.sp,
                           ),
                           textAlign: TextAlign.right,
@@ -105,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                       child: IconButton(
                         icon: Icon(
                           Icons.arrow_back_ios,
-                          color: const Color(0xFFCB3526),
+                          color: colors.error,
                           size: 20.sp,
                         ),
                         onPressed: () {},
@@ -120,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                 "المهام اليومية",
                 style: TextStyle(
                   fontFamily: 'Inter',
-                  color: const Color(0xFFCB3526),
+                  color: colors.error,
                   fontWeight: FontWeight.bold,
                   fontSize: 18.sp,
                 ),
@@ -134,7 +137,7 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.all(12.w),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.r),
-                  color: const Color(0xFF155F5E),
+                  color: colors.secondary,
                 ),
                 child: Column(
                   children: [
@@ -161,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                 "الانشطة",
                 style: TextStyle(
                   fontFamily: 'Inter',
-                  color: const Color(0xFFCB3526),
+                  color: colors.error,
                   fontWeight: FontWeight.bold,
                   fontSize: 18.sp,
                 ),
@@ -182,13 +185,13 @@ class _HomePageState extends State<HomePage> {
                 ),
                 itemBuilder: (context, index) {
                   return Card(
-                    color: const Color(0xFF152D45),
+                    color: colors.primary,
                     child: Center(
                       child: Text(
                         options[index],
                         style: TextStyle(
                           fontFamily: "B Fantezy",
-                          color: Colors.white,
+                          color: colors.background,
                           fontSize: 30.sp,
                         ),
                       ),
