@@ -1,10 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'electronic_sebha_viewModel/electronic_sebha_viewModel.dart';
-
 
 class SebhaView extends StatelessWidget {
   const SebhaView({super.key});
@@ -19,37 +17,44 @@ class SebhaView extends StatelessWidget {
         backgroundColor: const Color(0xFFE7E0D0),
         centerTitle: true,
         elevation: 0,
-        title: const Text(
+        title: Text(
           "السبحة الالكترونية",
           style: TextStyle(
-              color: Color(0xFFCB3526),
-              fontWeight: FontWeight.bold,
-              fontSize: 30,
-              fontFamily: 'Inter'
+            color: const Color(0xFFCB3526),
+            fontWeight: FontWeight.bold,
+            fontSize: 30.sp,
+            fontFamily: 'Inter',
           ),
         ),
-        bottom: const PreferredSize(
-          preferredSize: Size.fromHeight(1),
-          child: Divider(
-            color: Color(0xFFCB3526),
-            thickness: 1,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1.h),
+          child: SizedBox(
+            width: 250.w,
+            child: const Divider(
+              color: Color(0xFFCB3526),
+              thickness: 1,
+            ),
           ),
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 30),
+        padding: EdgeInsets.symmetric(vertical: 30.h),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
+              Text(
                 "العدات",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25,fontFamily: 'Inter'),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25.sp,
+                  fontFamily: 'Inter',
+                ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
               Container(
-                width: 250,
-                height: 250,
+                width: 250.w,
+                height: 250.w, // Keep it square and responsive
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: const Color(0xFFECC5B8),
@@ -58,44 +63,55 @@ class SebhaView extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Text(
                   "${viewModel.count}",
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 36,
-                    color: Color(0xFF152D45),
+                    fontSize: 36.sp,
+                    color: const Color(0xFF152D45),
                   ),
                 ),
               ),
-              const SizedBox(height: 40),
+              SizedBox(height: 40.h),
               ElevatedButton(
-
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF155F5E),
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 24.w,
+                    vertical: 12.h,
+                  ),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: BorderRadius.circular(6.r),
                   ),
                 ),
                 onPressed: viewModel.increment,
-                child: const Text(
+                child: Text(
                   "اضغط هنا للعد",
-                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,fontSize: 20,fontFamily: 'Inter'),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.sp,
+                    fontFamily: 'Inter',
+                  ),
                 ),
               ),
+              SizedBox(height: 20.h),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFCB3526), // Different color for reset
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  backgroundColor: const Color(0xFFCB3526),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 24.w,
+                    vertical: 12.h,
+                  ),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: BorderRadius.circular(6.r),
                   ),
                 ),
                 onPressed: viewModel.reset,
-                child: const Text(
+                child: Text(
                   "إعادة التصفير",
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    fontSize: 20.sp,
                     fontFamily: 'Inter',
                   ),
                 ),
