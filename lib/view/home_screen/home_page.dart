@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
           height: 80.h,
           width: 140.w,
           child: SvgPicture.asset(
-            "assets/images/fzkrAppBar.svg",
+            "assets/icons/fzkrAppBar.svg",
             fit: BoxFit.contain,
           ),
         ),
