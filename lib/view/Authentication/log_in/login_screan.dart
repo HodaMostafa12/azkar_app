@@ -1,5 +1,6 @@
 import 'package:azkar_app/view/Authentication/const_widgets/const_text_feild.dart';
 import 'package:azkar_app/view/Authentication/sign_up/sign_up_screan.dart';
+import 'package:azkar_app/view/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -94,7 +95,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      // هنا تحطي أكشن الزر
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>MainScreen()));
                     },
                     child: Text(
                       "تسجيل الدخول",

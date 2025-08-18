@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
+import '../Settings/settings_screen.dart';
 import '../electronic_sebha/electronic_sebha_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -17,7 +18,7 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 2; // Default to Home
 
   final List<Widget> _screens = [
-    const Center(child: Text("الإعدادات")), // Settings placeholder
+    const SettingsScreen(), // Settings placeholder
     const Center(child: Text("المفضلة")), // Favorites placeholder
     const HomePage(), // Your home screen body only
     const SebhaView(), // Sebha screen

@@ -2,6 +2,8 @@ import 'package:azkar_app/view/Authentication/const_widgets/const_text_feild.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../main_screen/main_screen.dart';
+
 class SignUpScrean extends StatelessWidget {
   const SignUpScrean({super.key});
 
@@ -86,7 +88,7 @@ class SignUpScrean extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      // هنا تحطي أكشن الزر
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>MainScreen()));
                     },
                     child: Text(
                       "انشاء حساب",
