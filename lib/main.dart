@@ -1,4 +1,6 @@
 import 'package:azkar_app/theme/app_theme.dart';
+import 'package:azkar_app/view/Pray_Time/praying_time.dart';
+import 'package:azkar_app/view/Settings/settings_screen.dart';
 import 'package:azkar_app/view/electronic_sebha/electronic_sebha_viewModel/electronic_sebha_viewModel.dart';
 import 'package:azkar_app/view/Authentication/log_in/login_screan.dart';
 import 'package:azkar_app/view/main_screen/main_screen.dart';
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
           ),
         );
       },
-      child: LoginScreen(), // or HomePage
+      child: MainScreen(), // or HomePage
     );
   }
 }
