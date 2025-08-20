@@ -1,7 +1,11 @@
 import 'package:azkar_app/utils/appbar.dart';
+import 'package:azkar_app/view/Authentication/log_in/login_screan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+
+import '../Authentication/view_model/auth_viewModel.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -21,6 +25,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
+    final authViewModel = context.watch<AuthViewModel>();
     return Scaffold(
       backgroundColor: colors.background, // A dark background color.
       appBar: CustomAppBar(title: "الاعدادات"),
@@ -31,11 +36,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: [
             SizedBox(height: 16.h),
             Text(
-              "hodamostafa@gmail.com",
+                authViewModel.user?.username ?? "ضيف",
               style: TextStyle(
                   fontFamily: "Inter",
                   color: colors.primary,
-                  fontSize: 20,
+                  fontSize: 30.sp,
                   fontWeight: FontWeight.bold
               ),
             ),
@@ -97,7 +102,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     _isNightModeEnabled = value;
                   });
                 },
-                trackOutlineColor: WidgetStateProperty.all(colors.primary),                activeColor: colors.secondary,
+                trackOutlineColor: MaterialStateProperty.all(colors.primary),
+                activeColor: colors.secondary,
                 inactiveTrackColor: colors.primary,
                 inactiveThumbColor: colors.secondary,
               ),
@@ -118,7 +124,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     _isNotificationsEnabled = value;
                   });
                 },
-                trackOutlineColor: WidgetStateProperty.all(colors.primary),
+                trackOutlineColor: MaterialStateProperty.all(colors.primary),
 
                 activeColor: colors.secondary,
                 inactiveTrackColor: colors.primary,
@@ -136,8 +142,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 colorFilter: ColorFilter.mode(colors.primary, BlendMode.srcIn),
               ),
               isButton: true,
-              onTap: () {
+              onTap: () async {
+                final success = await context.read<AuthViewModel>().logout();
+                if (success) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginScreen()));
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Something went wrong, try again.")),
+                  );
+                }
               },
+
             ),
             SizedBox(height: 6.h),
             Row(

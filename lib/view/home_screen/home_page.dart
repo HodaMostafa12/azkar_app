@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+
+import '../Authentication/view_model/auth_viewModel.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -45,7 +48,9 @@ class _HomePageState extends State<HomePage> {
             radius: 26.r,
             backgroundColor: colors.primary,
             child: Text(
-              "R",
+              (context.watch<AuthViewModel>().user?.username.isNotEmpty ?? false)
+                  ? context.watch<AuthViewModel>().user!.username[0].toUpperCase()
+                  : "?", // لو مفيش username يظهر علامة استفهام
               style: TextStyle(color: colors.background, fontSize: 18.sp),
             ),
           ),
