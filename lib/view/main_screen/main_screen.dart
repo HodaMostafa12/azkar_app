@@ -1,11 +1,9 @@
-import 'package:azkar_app/view/home_screen/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
-
 import '../Settings/settings_screen.dart';
 import '../electronic_sebha/electronic_sebha_screen.dart';
+import '../home_screen/home_page.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
