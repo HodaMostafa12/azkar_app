@@ -138,7 +138,7 @@ class _HomePageState extends State<HomePage> {
 
               // Second container
               Container(
-                height: 220.h,
+                //height: 220.h,
                 padding: EdgeInsets.all(12.w),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.r),
