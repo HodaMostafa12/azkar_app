@@ -37,6 +37,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: Image.asset(isDark
                     ? 'assets/images/logo_dark_1024.png'
                     : 'assets/images/logo_light_1024 (2).png'),
+                //image changes in modes
               ),
 
               SizedBox(
