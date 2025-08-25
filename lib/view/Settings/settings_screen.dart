@@ -97,7 +97,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     _isNightModeEnabled = value;
                   });
                 },
-                trackOutlineColor: WidgetStateProperty.all(colors.primary),                activeColor: colors.secondary,
+                trackOutlineColor: MaterialStateProperty.all(colors.primary),                activeColor: colors.secondary,
                 inactiveTrackColor: colors.primary,
                 inactiveThumbColor: colors.secondary,
               ),
@@ -118,7 +118,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     _isNotificationsEnabled = value;
                   });
                 },
-                trackOutlineColor: WidgetStateProperty.all(colors.primary),
+                trackOutlineColor: MaterialStateProperty.all(colors.primary),
 
                 activeColor: colors.secondary,
                 inactiveTrackColor: colors.primary,

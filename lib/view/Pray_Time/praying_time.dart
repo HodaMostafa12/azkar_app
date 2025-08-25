@@ -14,18 +14,22 @@ class PrayerTime extends StatefulWidget {
 }
 
 class _PrayerTimeState extends State<PrayerTime> {
-  bool _isChecked = false;
+  List<bool> _isCheckedList = List.filled(5, false);
+
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
+    final colors = Theme
+        .of(context)
+        .colorScheme;
 
     return Scaffold(
       backgroundColor: colors.background,
-      appBar: CustomAppBar(title: "مواقيت الصلاة"),
+      appBar: const CustomAppBar(title: "مواقيت الصلاة"),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          SizedBox(height: 60.h,),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Row(
@@ -41,7 +45,7 @@ class _PrayerTimeState extends State<PrayerTime> {
                   icon: const Icon(Icons.arrow_forward_ios_rounded),
                   color: colors.error,
                 ),
-                SizedBox(width: 8.w),
+                // SizedBox(width: 8.w),
                 const Spacer(),
                 Text(
                   "الاحد",
@@ -63,10 +67,10 @@ class _PrayerTimeState extends State<PrayerTime> {
               ],
             ),
           ),
-          SizedBox(
-            width: 300.w,
-            child: Divider(
-              color: Colors.black,
+          Padding(
+            padding: EdgeInsets.only(right: 16.w, left: 16.w),
+            child:  Divider(
+              color: colors.primary,
               thickness: 1,
             ),
           ),
@@ -82,7 +86,7 @@ class _PrayerTimeState extends State<PrayerTime> {
                     style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
-                      color: colors.secondary,
+                      color: colors.primary,
                     ),
                   ),
                   SizedBox(height: 8.h),
@@ -91,135 +95,71 @@ class _PrayerTimeState extends State<PrayerTime> {
                     style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
-                      color: colors.secondary,
+                      color: colors.primary,
                     ),
                   ),
                 ],
               ),
             ),
           ),
-          SizedBox(
-            width: 300.w,
-            child: Divider(
-              color: Colors.black,
+          Padding(
+            padding: EdgeInsets.only(right: 16.w, left: 16.w),
+            child:  Divider(
+              color:colors.primary,
               thickness: 1,
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              _buildPrayerTile(
-                iconWidget: SvgPicture.asset("assets/icons/Sunrise.svg"),
-                title: "الفجر",
-                subtitle: "12:56",
-              ),
-              CustomCheckbox(
-                value: _isChecked,
-                onChanged: (newValue) {
-                  setState(() {
-                    _isChecked = newValue!;
-                  });
-                },
-                activeColor: colors.background,
-                checkColor: colors.secondary,
-                borderColor: colors.secondary,
-                overlayColor: colors.secondary,
-              ),
-            ],
-          ),
-          SizedBox(height: 30.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              _buildPrayerTile(
-                iconWidget: SvgPicture.asset("assets/icons/Cloudy.svg"),
-                title: "الظهر",
-                subtitle: "12:56",
-              ),
-              CustomCheckbox(
-                value: _isChecked,
-                onChanged: (newValue) {
-                  setState(() {
-                    _isChecked = newValue!;
-                  });
-                },
-                activeColor: colors.background,
-                checkColor: colors.secondary,
-                borderColor: colors.secondary,
-                overlayColor: colors.secondary,
-              ),
-            ],
-          ),
-          SizedBox(height: 30.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              _buildPrayerTile(
-                iconWidget: SvgPicture.asset("assets/icons/Sun set.svg"),
-                title: "العصر",
-                subtitle: "12:56",
-              ),
-              CustomCheckbox(
-                value: _isChecked,
-                onChanged: (newValue) {
-                  setState(() {
-                    _isChecked = newValue!;
-                  });
-                },
-                activeColor: colors.background,
-                checkColor: colors.secondary,
-                borderColor: colors.secondary,
-                overlayColor: colors.secondary,
-              ),
-            ],
-          ),
-          SizedBox(height: 30.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              _buildPrayerTile(
-                iconWidget: SvgPicture.asset("assets/icons/Sun set.svg"),
-                title: "المغرب",
-                subtitle: "12:56",
-              ),
-              CustomCheckbox(
-                value: _isChecked,
-                onChanged: (newValue) {
-                  setState(() {
-                    _isChecked = newValue!;
-                  });
-                },
-                activeColor: colors.background,
-                checkColor: colors.secondary,
-                borderColor: colors.secondary,
-                overlayColor: colors.secondary,
-              ),
-            ],
-          ),
-          SizedBox(height: 30.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              _buildPrayerTile(
-                iconWidget: SvgPicture.asset("assets/icons/Moon 2.svg"),
-                title: "العشاء",
-                subtitle: "12:56",
-              ),
-              CustomCheckbox(
-                value: _isChecked,
-                onChanged: (newValue) {
-                  setState(() {
-                    _isChecked = newValue!;
-                  });
-                },
-                activeColor: colors.background,
-                checkColor: colors.secondary,
-                borderColor: colors.secondary,
-                overlayColor: colors.secondary,
-              ),
-            ],
-          ),
-          SizedBox(height: 30.h),
+          SizedBox(height: 20.h,),
+          Expanded(
+            child: ListView.builder(
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                List<String> slah = [
+                  "الفجر",
+                  "الظهر",
+                  "العصر",
+                  "المغرب",
+                  "العشاء"
+                ];
+                List<String> slahAssets = [
+                  "assets/icons/sunrise.png",
+                  "assets/icons/sun.png",
+                  "assets/icons/sunCloud.png",
+                  "assets/icons/sunset.png",
+                  "assets/icons/moon22.png"
+                ];
+
+                return Column(
+                  children: [
+                    SizedBox(height: 10.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        _buildPrayerTile(
+                          iconWidget: Image.asset(slahAssets[index]),
+                          title: slah[index],
+                          subtitle: "12:56",
+                        ),
+                        CustomCheckbox(
+                          value: _isCheckedList[index], // كل واحدة لها index
+                          onChanged: (newValue) {
+                            setState(() {
+                              _isCheckedList[index] = newValue!;
+                            });
+                          },
+                          activeColor: colors.background,
+                          checkColor: colors.secondary,
+                          borderColor: colors.secondary,
+                          overlayColor: colors.secondary,
+                        ),
+                        SizedBox(height: 30.h),
+                      ],
+                    ),
+                  ],
+                );
+              },
+            ),
+          )
         ],
       ),
     );
@@ -229,7 +169,6 @@ class _PrayerTimeState extends State<PrayerTime> {
     required String title,
     required String subtitle,
     required Widget iconWidget,
-
   }) {
     final colors = Theme.of(context).colorScheme;
     return Padding(
@@ -249,41 +188,33 @@ class _PrayerTimeState extends State<PrayerTime> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // The title and icon are on the right (for RTL)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+            SizedBox(
+              height: 50.h,
+              width: 50.w,
+              child: iconWidget,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end, // Align text to the right
-                  children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                        fontFamily: "Inter",
-                        color: colors.background,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      subtitle,
-                      style: TextStyle(
-                        fontFamily: "Inter",
-                        color: colors.background,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontFamily: "Inter",
+                    color: colors.primary,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                ColorFiltered(
-                  colorFilter: ColorFilter.mode(colors.background, BlendMode.srcIn),
-                  child: iconWidget,
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    fontFamily: "Inter",
+                    color: colors.primary,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                // Apply a color filter to the SVG to make it visible
-
               ],
             ),
           ],

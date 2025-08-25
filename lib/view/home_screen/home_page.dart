@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../Pray_Time/praying_time.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -10,33 +12,34 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 2;
   final List<String> options = [
     "الاذكار",
     "مواقيت الصلاة",
     "المصحف",
-    "المصحف",
     "القبلة",
-    "المهام اليومية"
+    "المهام اليومية",
   ];
-  final List<bool> _tasks = [false, false, false, false, false];
 
-  void _onNavTap(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+
+  final Map<String, Widget> screenMap = {
+    "الاذكار": PrayerTime(), // هنا حطي شاشة الأذكار
+    "مواقيت الصلاة": PrayerTime(),
+    "المصحف": PrayerTime(), // هنا حطي شاشة المصحف
+    "القبلة": PrayerTime(), // هنا حطي شاشة القبلة
+    "المهام اليومية": PrayerTime(), // هنا حطي شاشة المهام
+  };
+
+  final List<bool> _tasks = [false, false, false];
 
   @override
   Widget build(BuildContext context) {
-    final colors =Theme.of(context).colorScheme;
-    final textTheme =Theme.of(context).textTheme;
+    final colors = Theme.of(context).colorScheme;
 
     return Scaffold(
       backgroundColor: colors.background,
       appBar: AppBar(
         toolbarHeight: 100.h,
-        backgroundColor:colors.background,
+        backgroundColor: colors.background,
         centerTitle: true,
         elevation: 0,
         leading: Padding(
@@ -54,7 +57,9 @@ class _HomePageState extends State<HomePage> {
           height: 80.h,
           width: 140.w,
           child: SvgPicture.asset(
-            "assets/icons/fzkrAppBar.svg",
+            Theme.of(context).brightness == Brightness.light ?
+            "assets/icons/fzkrAppBar.svg":
+            "assets/icons/darkmode.svg",
             fit: BoxFit.contain,
           ),
         ),
@@ -184,15 +189,27 @@ class _HomePageState extends State<HomePage> {
                   crossAxisSpacing: 16.w,
                 ),
                 itemBuilder: (context, index) {
-                  return Card(
-                    color: colors.primary,
-                    child: Center(
-                      child: Text(
-                        options[index],
-                        style: TextStyle(
-                          fontFamily: "B Fantezy",
-                          color: colors.background,
-                          fontSize: 30.sp,
+                  final option = options[index];
+                  return InkWell(
+                    onTap: () {
+                      final screen = screenMap[option];
+                      if (screen != null) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => screen),
+                        );
+                      }
+                    },
+                    child: Card(
+                      color: colors.primary,
+                      child: Center(
+                        child: Text(
+                          option,
+                          style: TextStyle(
+                            fontFamily: "B Fantezy",
+                            color: colors.background,
+                            fontSize: 30.sp,
+                          ),
                         ),
                       ),
                     ),
