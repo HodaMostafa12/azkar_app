@@ -1,231 +1,249 @@
-import 'package:azkar_app/utils/appbar.dart';
-import 'package:azkar_app/view/Authentication/log_in/login_screan.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../Authentication/view_model/auth_viewModel.dart';
+import '../Pray_Time/praying_time.dart';
 
-class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
-  final List<String> _languages = ['English', 'العربية', 'Français'];
+class _HomePageState extends State<HomePage> {
+  final List<String> options = [
+    "الاذكار",
+    "مواقيت الصلاة",
+    "المصحف",
+    "القبلة",
+    "المهام اليومية",
+  ];
 
-  String _selectedLanguage = 'English';
 
-  bool _isNightModeEnabled = false;
-  bool _isNotificationsEnabled = true;
+  final Map<String, Widget> screenMap = {
+    "الاذكار": PrayerTime(), // هنا حطي شاشة الأذكار
+    "مواقيت الصلاة": PrayerTime(),
+    "المصحف": PrayerTime(), // هنا حطي شاشة المصحف
+    "القبلة": PrayerTime(), // هنا حطي شاشة القبلة
+    "المهام اليومية": PrayerTime(), // هنا حطي شاشة المهام
+  };
+
+  final List<bool> _tasks = [false, false, false];
 
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    final authViewModel = context.watch<AuthViewModel>();
+
     return Scaffold(
-      backgroundColor: colors.background, // A dark background color.
-      appBar: CustomAppBar(title: "الاعدادات"),
-      body: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            SizedBox(height: 16.h),
-            Text(
-                authViewModel.user?.username ?? "ضيف",
-              style: TextStyle(
-                  fontFamily: "Inter",
-                  color: colors.primary,
-                  fontSize: 30.sp,
-                  fontWeight: FontWeight.bold
-              ),
+      backgroundColor: colors.background,
+      appBar: AppBar(
+        toolbarHeight: 100.h,
+        backgroundColor: colors.background,
+        centerTitle: true,
+        elevation: 0,
+        leading: Padding(
+          padding: EdgeInsets.all(8.w),
+          child: CircleAvatar(
+            radius: 26.r,
+            backgroundColor: colors.primary,
+            child: Text(
+              "R",
+              style: TextStyle(color: colors.background, fontSize: 18.sp),
             ),
-            SizedBox(height: 16.h),
-            Text(
-              "العامة",
-              style: TextStyle(
-                fontFamily: "Inter",
-                color: colors.error,
-                fontWeight: FontWeight.bold,
-                fontSize: 30,
-              ),
-            ),
-            SizedBox(height: 16.h),
-            _buildSettingsTile(
-              title: "اللغة",
-              iconWidget: SvgPicture.asset(
-                "assets/icons/Global.svg",
-                height: 24,
-                width: 24,
-                colorFilter: ColorFilter.mode(colors.primary, BlendMode.srcIn),
-              ),
-              trailing: DropdownButton<String>(
-                value: _selectedLanguage,
-                underline: const SizedBox(),
-                dropdownColor: colors.primary,
-                icon: Icon(Icons.keyboard_arrow_down, color: colors.primary),
-                items: _languages.map((String language) {
-                  return DropdownMenuItem<String>(
-                    value: language,
-                    child: Text(
-                      language,
-                      style: TextStyle(color: colors.primary),
-                    ),
-                  );
-                }).toList(),
-                onChanged: (String? newValue) {
-                  if (newValue != null) {
-                    setState(() {
-                      _selectedLanguage = newValue;
-                    });
-                  }
-                },
-              ),
-            ),
-            SizedBox(height: 16.h),
-            _buildSettingsTile(
-              title: "الوضع الليلي",
-              iconWidget: SvgPicture.asset(
-                "assets/icons/Moon.svg",
-                height: 24,
-                width: 24,
-                colorFilter: ColorFilter.mode(colors.primary, BlendMode.srcIn),
-              ),
-              trailing: Switch(
-                value: _isNightModeEnabled,
-                onChanged: (bool value) {
-                  setState(() {
-                    _isNightModeEnabled = value;
-                  });
-                },
-                trackOutlineColor: MaterialStateProperty.all(colors.primary),
-                activeColor: colors.secondary,
-                inactiveTrackColor: colors.primary,
-                inactiveThumbColor: colors.secondary,
-              ),
-            ),
-            SizedBox(height: 16.h),
-            _buildSettingsTile(
-              title: "الأشعارات",
-              iconWidget: SvgPicture.asset(
-                "assets/icons/Notification.svg",
-                height: 24,
-                width: 24,
-                colorFilter: ColorFilter.mode(colors.primary, BlendMode.srcIn),
-              ),
-              trailing: Switch(
-                value: _isNotificationsEnabled,
-                onChanged: (bool value) {
-                  setState(() {
-                    _isNotificationsEnabled = value;
-                  });
-                },
-                trackOutlineColor: MaterialStateProperty.all(colors.primary),
-
-                activeColor: colors.secondary,
-                inactiveTrackColor: colors.primary,
-                inactiveThumbColor: colors.secondary,
-              ),
-            ),
-            SizedBox(height: 16.h),
-            _buildSettingsTile(
-              title: "تسجيل خروج",
-              // `iconWidget` now accepts SvgPicture.
-              iconWidget: SvgPicture.asset(
-                "assets/icons/signout.svg",
-                height: 24,
-                width: 24,
-                colorFilter: ColorFilter.mode(colors.primary, BlendMode.srcIn),
-              ),
-              isButton: true,
-              onTap: () async {
-                final success = await context.read<AuthViewModel>().logout();
-                if (success) {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginScreen()));
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Something went wrong, try again.")),
-                  );
-                }
-              },
-
-            ),
-            SizedBox(height: 6.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton.icon(
-                  onPressed: () {},
-                  label: Text(
-                    "تواصلوا معنا",
-                    style: TextStyle(
-                      fontFamily: "Inter",
-                      color: colors.error,
-                      fontSize: 30,
-                    ),
-                  ),
-                  icon: Icon(Icons.person_search_rounded, color: colors.secondary, size: 30),
+          ),
+        ),
+        title: SizedBox(
+          height: 80.h,
+          width: 140.w,
+          child: SvgPicture.asset(
+            Theme.of(context).brightness == Brightness.light ?
+            "assets/icons/fzkrAppBar.svg":
+            "assets/icons/darkmode.svg",
+            fit: BoxFit.contain,
+          ),
+        ),
+      ),
+      body: Align(
+        alignment: Alignment.centerRight,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          child: ListView(
+            children: [
+              SizedBox(height: 10.h),
+              Text(
+                "الورد اليومى",
+                style: TextStyle(
+                  fontFamily: 'Inter',
+                  color: colors.error,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18.sp,
                 ),
-              ],
-            ),
-            SizedBox(height: 8.h),
-            InkWell(
-              onTap: () {},
-              child: SvgPicture.asset("assets/icons/linkedin.svg", height: 100),
-            )
-          ],
+                textAlign: TextAlign.right,
+              ),
+              SizedBox(height: 10.h),
+
+              // First container
+              Container(
+                padding: EdgeInsets.all(16.w),
+                height: 150.h,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.r),
+                  color: colors.primary,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Text(
+                          "سورة البقرة، آية 100\n"
+                              "أَوَكُلَّمَا عَاهَدُوا عَهْدًا نَّبَذَهُ فَرِيقٌ مِّنْهُم...",
+                          style: TextStyle(
+                            color: colors.background,
+                            fontSize: 18.sp,
+                          ),
+                          textAlign: TextAlign.right,
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          color: colors.error,
+                          size: 20.sp,
+                        ),
+                        onPressed: () {},
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: 20.h),
+              Text(
+                "المهام اليومية",
+                style: TextStyle(
+                  fontFamily: 'Inter',
+                  color: colors.error,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18.sp,
+                ),
+                textAlign: TextAlign.right,
+              ),
+              SizedBox(height: 10.h),
+
+              // Second container
+              Container(
+                height: 220.h,
+                padding: EdgeInsets.all(12.w),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.r),
+                  color: colors.secondary,
+                ),
+                child: Column(
+                  children: [
+                    _buildTaskItem("أذكار الصباح", 0),
+                    _buildTaskItem("الورد اليومى", 1),
+                    _buildTaskItem("أذكار المساء", 2),
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          color: const Color(0xFFCB3526),
+                          size: 20.sp,
+                        ),
+                        onPressed: () {},
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: 20.h),
+              Text(
+                "الانشطة",
+                style: TextStyle(
+                  fontFamily: 'Inter',
+                  color: colors.error,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18.sp,
+                ),
+                textAlign: TextAlign.right,
+              ),
+              SizedBox(height: 10.h),
+
+              // GridView
+              GridView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: options.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: 1.5,
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 10.h,
+                  crossAxisSpacing: 16.w,
+                ),
+                itemBuilder: (context, index) {
+                  final option = options[index];
+                  return InkWell(
+                    onTap: () {
+                      final screen = screenMap[option];
+                      if (screen != null) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => screen),
+                        );
+                      }
+                    },
+                    child: Card(
+                      color: colors.primary,
+                      child: Center(
+                        child: Text(
+                          option,
+                          style: TextStyle(
+                            fontFamily: "B Fantezy",
+                            color: colors.background,
+                            fontSize: 30.sp,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildSettingsTile({
-    required String title,
-    required Widget iconWidget,
-    Widget? trailing,
-    bool isButton = false,
-    VoidCallback? onTap,
-  }) {
-    final colors = Theme.of(context).colorScheme;
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.0),
-        border: Border.all(
-          color: colors.primary,
-          width: 2,
+  // Right-aligned checkbox + text
+  Widget _buildTaskItem(String title, int index) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Text(
+          title,
+          style: TextStyle(color: Colors.white, fontSize: 16.sp),
         ),
-        color: colors.background,
-      ),
-      child: InkWell(
-        onTap: isButton ? onTap : null,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            if (trailing != null) trailing,
-            const Spacer(),
-            // The title and icon.
-            Row(
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontFamily: "Inter",
-                    color: colors.primary,
-                    fontSize: 20,
-                  ),
-                ),
-                SizedBox(width: 16.w),
-                iconWidget,
-              ],
-            ),
-          ],
+        Checkbox(
+          value: _tasks[index],
+          onChanged: (val) {
+            setState(() {
+              _tasks[index] = val ?? false;
+            });
+          },
+          checkColor: Colors.black,
+          fillColor: MaterialStateProperty.all(Colors.white),
+          activeColor: const Color(0xFFCB3526),
         ),
-      ),
+      ],
     );
   }
 }

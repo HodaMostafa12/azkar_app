@@ -29,8 +29,8 @@ class CustomCheckbox extends StatelessWidget {
         onChanged: onChanged,
         activeColor: activeColor,
         checkColor: checkColor,
-        overlayColor: WidgetStateProperty.all(overlayColor),
-        side: WidgetStateBorderSide.resolveWith(
+        overlayColor: MaterialStateProperty.all(overlayColor),
+        side: MaterialStateBorderSide.resolveWith(
               (states) => BorderSide(
             color: borderColor, // Set outline color
             width: 2.0, // Set outline thickness
