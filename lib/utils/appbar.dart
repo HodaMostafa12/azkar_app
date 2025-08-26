@@ -3,12 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
  final String title;
- final bool automaticallyImplyLeading; // 👈 أضفنا الخاصية
+ final bool showBackButton; // 👈 تحكم يدوي في زر الرجوع
 
  const CustomAppBar({
   super.key,
   required this.title,
-  this.automaticallyImplyLeading = false, // 👈 افتراضي يظهر زر الرجوع
+  this.showBackButton = false, // 👈 افتراضي بدون زر رجوع
  });
 
  @override
@@ -19,7 +19,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
    backgroundColor: colors.background,
    centerTitle: true,
    elevation: 0,
-   automaticallyImplyLeading: automaticallyImplyLeading, // 👈 هنا التفعيل
+   automaticallyImplyLeading: false, // 👈 نوقف الافتراضي
+   leading: showBackButton
+       ? IconButton(
+    icon: Icon(Icons.arrow_back_ios, color: colors.error),
+    onPressed: () => Navigator.of(context).maybePop(),
+   )
+       : null, // 👈 لو false مش هيظهر
    title: Text(
     title,
     style: TextStyle(

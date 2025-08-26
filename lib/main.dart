@@ -1,6 +1,8 @@
 import 'package:azkar_app/theme/app_theme.dart';
 import 'package:azkar_app/view/Authentication/log_in/login_screan.dart';
 import 'package:azkar_app/view/Authentication/view_model/auth_viewModel.dart';
+import 'package:azkar_app/view/azkar/azkar_categories_screen.dart';
+import 'package:azkar_app/view/azkar/azkar_view_model/azkar_view_model.dart';
 import 'package:azkar_app/view/electronic_sebha/electronic_sebha_viewModel/electronic_sebha_viewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,7 +36,8 @@ class MyApp extends StatelessWidget {
         return MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (_) => SebhaViewModel()),
-            ChangeNotifierProvider(create: (_) => AuthViewModel()), // ✅ add AuthViewModel
+            ChangeNotifierProvider(create: (_) => AuthViewModel()),
+            ChangeNotifierProvider(create: (_) => AzkarViewModel()),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -42,8 +45,8 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
             themeMode: ThemeMode.system,
-
-            // ✅ If user already logged in → go to MainScreen, else LoginScreen
+// home: AzkarScreen(),
+           // ✅ If user already logged in → go to MainScreen, else LoginScreen
             home: Supabase.instance.client.auth.currentUser != null
                 ? const MainScreen()
                 : const LoginScreen(),
