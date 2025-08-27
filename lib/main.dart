@@ -1,13 +1,16 @@
 import 'package:azkar_app/theme/app_theme.dart';
 import 'package:azkar_app/view/Authentication/log_in/login_screan.dart';
 import 'package:azkar_app/view/Authentication/view_model/auth_viewModel.dart';
-import 'package:azkar_app/view/azkar/azkar_categories_screen.dart';
+import 'package:azkar_app/view/Pray_Time/prayer_time_view_model/prayer_time_view_model.dart';
 import 'package:azkar_app/view/azkar/azkar_view_model/azkar_view_model.dart';
 import 'package:azkar_app/view/electronic_sebha/electronic_sebha_viewModel/electronic_sebha_viewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+// ✅ إضافة مكتبة intl
+import 'package:intl/date_symbol_data_local.dart';
 
 import 'view/main_screen/main_screen.dart';
 
@@ -19,6 +22,9 @@ Future<void> main() async {
     url: 'https://wxbafynocquilkaywwpe.supabase.co',
     anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind4YmFmeW5vY3F1aWxrYXl3d3BlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU1Mjc0MzEsImV4cCI6MjA3MTEwMzQzMX0.Ic2v57k6iolvTaBa_hcBBm5Xz0qCKt_WlmW4Vq5Q3qg',
   );
+
+  // ✅ initialize locale data (مهم جداً قبل runApp)
+  await initializeDateFormatting('ar', null);
 
   runApp(const MyApp());
 }
@@ -38,6 +44,7 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProvider(create: (_) => SebhaViewModel()),
             ChangeNotifierProvider(create: (_) => AuthViewModel()),
             ChangeNotifierProvider(create: (_) => AzkarViewModel()),
+            ChangeNotifierProvider(create: (_) => PrayerTimeViewModel()),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -45,8 +52,7 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
             themeMode: ThemeMode.system,
-// home: AzkarScreen(),
-           // ✅ If user already logged in → go to MainScreen, else LoginScreen
+            // ✅ If user already logged in → go to MainScreen, else LoginScreen
             home: Supabase.instance.client.auth.currentUser != null
                 ? const MainScreen()
                 : const LoginScreen(),
