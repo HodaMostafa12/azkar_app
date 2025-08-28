@@ -1,4 +1,5 @@
-import 'package:azkar_app/utils/appbar.dart';
+import 'package:azkar_app/theme/theme_provider.dart';
+import 'package:azkar_app/view/Authentication/utils/appbar.dart';
 import 'package:azkar_app/view/Authentication/log_in/login_screan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,7 +29,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final authViewModel = context.watch<AuthViewModel>();
     return Scaffold(
       backgroundColor: colors.background, // A dark background color.
-      appBar: CustomAppBar(title: "الاعدادات"),
+      appBar: CustomAppBar(title: "الاعدادات",showBackButton: false,),
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(
@@ -88,7 +89,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             SizedBox(height: 16.h),
             _buildSettingsTile(
-              title: "الوضع الليلي",
+              title: context.watch<ThemeProvider>().themeMode == ThemeMode.dark
+                  ? "الوضع النهاري"
+                  : "الوضع الليلي",
               iconWidget: SvgPicture.asset(
                 "assets/icons/Moon.svg",
                 height: 24,
@@ -96,11 +99,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 colorFilter: ColorFilter.mode(colors.primary, BlendMode.srcIn),
               ),
               trailing: Switch(
-                value: _isNightModeEnabled,
+                value: context.watch<ThemeProvider>().themeMode == ThemeMode.dark,
                 onChanged: (bool value) {
-                  setState(() {
-                    _isNightModeEnabled = value;
-                  });
+                 context.read<ThemeProvider>().toggleTheme(value);
                 },
                 trackOutlineColor: MaterialStateProperty.all(colors.primary),
                 activeColor: colors.secondary,
