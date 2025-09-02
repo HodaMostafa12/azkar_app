@@ -1,4 +1,5 @@
 import 'package:azkar_app/view/azkar/azkar_categories_screen.dart';
+import 'package:azkar_app/view/todo_screen/todo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -122,7 +123,9 @@ class _HomePageState extends State<HomePage> {
                           color: colors.error,
                           size: 20.sp,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+
+                        },
                       ),
                     ),
                   ],
@@ -160,10 +163,12 @@ class _HomePageState extends State<HomePage> {
                       child: IconButton(
                         icon: Icon(
                           Icons.arrow_back_ios,
-                          color: const Color(0xFFCB3526),
+                          color: colors.error,
                           size: 20.sp,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> TodoScreen()));
+                        },
                       ),
                     ),
                   ],

@@ -55,7 +55,7 @@ class _PrayerTimeState extends State<PrayerTime> {
     setState(() {});
   }
 
-  /// ✅ حفظ حالة الـ Checkboxes
+
   Future<void> _saveCheckboxState() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setStringList("checkboxes", _isCheckedList.map((e) => e.toString()).toList());
@@ -89,7 +89,7 @@ class _PrayerTimeState extends State<PrayerTime> {
         children: [
           SizedBox(height: 20.h),
 
-          // ✅ التاريخ فوق القائمة
+
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Column(
@@ -105,7 +105,7 @@ class _PrayerTimeState extends State<PrayerTime> {
                         fontFamily: "Inter",
                         color: colors.error,
                         fontWeight: FontWeight.bold,
-                        fontSize: 30.sp,
+                        fontSize: 25.sp,
                       ),
                     ),
                     IconButton(
@@ -130,7 +130,7 @@ class _PrayerTimeState extends State<PrayerTime> {
                         Text(
                           hijriDate,
                           style: TextStyle(
-                            fontSize: 20.sp,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
                             color: colors.primary,
                           ),
@@ -139,7 +139,7 @@ class _PrayerTimeState extends State<PrayerTime> {
                         Text(
                           gregorianDate,
                           style: TextStyle(
-                            fontSize: 20.sp,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
                             color: colors.primary,
                           ),
@@ -157,6 +157,7 @@ class _PrayerTimeState extends State<PrayerTime> {
           // ✅ قائمة مواقيت الصلاة
           Expanded(
             child: ListView.builder(
+
               itemCount: viewModel.prayerTimes.length,
               itemBuilder: (context, index) {
                 final prayer = viewModel.prayerTimes[index];
@@ -168,28 +169,31 @@ class _PrayerTimeState extends State<PrayerTime> {
                   "assets/icons/sunCloud.png",
                   "assets/icons/sunset.png",
                   "assets/icons/moon22.png" ];
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _buildPrayerTile(
-                      title: prayer.name,
-                      subtitle: formattedTime,
-                      iconWidget:Image.asset(slahAssets[index]),
-                    ),
-                    CustomCheckbox(
-                      value: index < _isCheckedList.length ? _isCheckedList[index] : false,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _isCheckedList[index] = newValue!;
-                        });
-                        _saveCheckboxState(); // ✅ احفظ التغيير
-                      },
-                      activeColor: Colors.white, // ✅ خلفية بيضاء عند التفعيل
-                      checkColor: colors.secondary, // ✅ لون علامة الصح
-                      borderColor: colors.secondary,
-                      overlayColor: colors.secondary,
-                    ),
-                  ],
+                return Padding(
+                  padding:  EdgeInsets.only(right: 8.w,),
+                  child: Row(
+                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _buildPrayerTile(
+                        title: prayer.name,
+                        subtitle: formattedTime,
+                        iconWidget:Image.asset(slahAssets[index]),
+                      ),
+                      CustomCheckbox(
+                        value: index < _isCheckedList.length ? _isCheckedList[index] : false,
+                        onChanged: (newValue) {
+                          setState(() {
+                            _isCheckedList[index] = newValue!;
+                          });
+                          _saveCheckboxState(); // ✅ احفظ التغيير
+                        },
+                        activeColor: Colors.white, // ✅ خلفية بيضاء عند التفعيل
+                        checkColor: colors.secondary, // ✅ لون علامة الصح
+                        borderColor: colors.secondary,
+                        overlayColor: colors.secondary,
+                      ),
+                    ],
+                  ),
                 );
               },
             ),
@@ -224,13 +228,13 @@ class _PrayerTimeState extends State<PrayerTime> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(title,
-                  style: TextStyle(
-                      color: colors.primary,
+                  style:const TextStyle(
+                      color: Color(0xFFE7E0D0),
                       fontSize: 20,
                       fontWeight: FontWeight.bold)),
               Text(subtitle,
-                  style: TextStyle(
-                      color: colors.primary,
+                  style:const TextStyle(
+                      color: Color(0xFFE7E0D0),
                       fontSize: 18,
                       fontWeight: FontWeight.w500)),
             ],

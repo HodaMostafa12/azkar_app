@@ -40,22 +40,32 @@ class _MainScreenState extends State<MainScreen> {
           topLeft: Radius.circular(30),
           topRight: Radius.circular(30),
         ),
-        child: Padding(
-          padding:  EdgeInsets.only(top: 4.h),
-          child: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            currentIndex: _selectedIndex,
-            onTap: _onNavTap,
-            selectedItemColor: colors.error,
-            unselectedItemColor: Colors.grey,
-            backgroundColor: colors.primary,
-            items: [
-              _buildNavItem("assets/icons/settings.svg", "الإعدادات", 0),
-              _buildNavItem("assets/icons/fav.svg", "المفضلة", 1),
-              _buildNavItem("assets/icons/home.svg", "الرئيسية", 2),
-              _buildNavItem("assets/icons/seb7a.svg", "السبحه الالكترونية", 3),
-            ],
-          ),
+        child: Column(
+
+          mainAxisSize: MainAxisSize.min,
+          children: [
+          Divider(
+          height: 1,
+          thickness: 1,
+          color: Colors.grey.shade400, // Line color
+        ),
+            BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              currentIndex: _selectedIndex,
+              onTap: _onNavTap,
+              selectedFontSize: 8.h,
+              unselectedFontSize: 8.h,
+              selectedItemColor: colors.error,
+              unselectedItemColor: Colors.grey,
+              backgroundColor: colors.background,
+              items: [
+                _buildNavItem("assets/icons/settings.svg", "الإعدادات", 0,),
+                _buildNavItem("assets/icons/fav.svg", "المفضلة", 1),
+                _buildNavItem("assets/icons/home.svg", "الرئيسية", 2),
+                _buildNavItem("assets/icons/seb7a.svg", "السبحه الالكترونية", 3),
+              ],
+            ),
+          ],
         ),
       ),
     );

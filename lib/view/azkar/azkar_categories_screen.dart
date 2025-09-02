@@ -39,7 +39,10 @@ class _AzkarScreenState extends State<AzkarScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: 20.h),
-            Center(child: Image.asset("assets/images/azkarImage.png")),
+            Center(child: Padding(
+              padding:  EdgeInsets.only(right: 16.w, left: 16.w),
+              child: Image.asset("assets/images/azkarImage.png"),
+            )),
             SizedBox(height: 20.h),
             Expanded(
               child: Builder(
