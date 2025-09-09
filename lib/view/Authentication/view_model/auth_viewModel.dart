@@ -1,3 +1,5 @@
+// lib/view_model/auth_viewModel.dart
+
 import 'package:flutter/material.dart';
 import '../repo/auth_repo.dart';
 import '../repo/model/auth-model.dart';
@@ -12,6 +14,12 @@ class AuthViewModel extends ChangeNotifier {
   UserModel? get user => _user;
   bool get isLoading => _isLoading;
   String? get error => _error;
+
+  // 1. Add this method to check for a current user when the app starts.
+  void init() {
+    _user = _authRepository.getCurrentUser();
+    notifyListeners();
+  }
 
   Future<void> signUp(String email, String password, String username) async {
     _isLoading = true;
@@ -55,8 +63,4 @@ class AuthViewModel extends ChangeNotifier {
       return false;
     }
   }
-
-
-
-
 }
