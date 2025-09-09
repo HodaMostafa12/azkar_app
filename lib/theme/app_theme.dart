@@ -14,6 +14,7 @@ class AppTheme {
     secondary: AppColorsLight.textSecondary,
     onSecondary: Colors.white, // لون النص فوق الـ secondary
     error: AppColorsLight.textPrimary, // لو حابب تحدده
+        surface: AppColorsLight.container
   ),
     textTheme: TextTheme(
       bodyLarge: TextStyle(color: AppColorsLight.textPrimary),
@@ -37,6 +38,8 @@ class AppTheme {
     secondary: AppColorsDark.textSecondary,
     onSecondary: Colors.black,
     error: AppColorsDark.textPrimary,
+       surface: AppColorsDark.container
+
   ),
     textTheme: TextTheme(
       bodyLarge: TextStyle(color: AppColorsDark.textPrimary),

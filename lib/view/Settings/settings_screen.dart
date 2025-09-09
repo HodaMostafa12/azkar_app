@@ -1,11 +1,11 @@
 import 'package:azkar_app/theme/theme_provider.dart';
-import 'package:azkar_app/view/Authentication/utils/appbar.dart';
 import 'package:azkar_app/view/Authentication/log_in/login_screan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
+import '../../utils/appbar.dart';
 import '../Authentication/view_model/auth_viewModel.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -34,7 +34,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
+          children:[
             SizedBox(height: 16.h),
             Text(
               authViewModel.user?.username ?? "ضيف",

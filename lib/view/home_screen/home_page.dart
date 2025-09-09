@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                 "الورد اليومى",
                 style: TextStyle(
                   fontFamily: 'Inter',
-                  color: colors.error,
+                  color:colors.primary,
                   fontWeight: FontWeight.bold,
                   fontSize: 18.sp,
                 ),
@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                 height: 150.h,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.r),
-                  color: colors.primary,
+                  color:colors.surface,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                           "سورة البقرة، آية 100\n"
                               "أَوَكُلَّمَا عَاهَدُوا عَهْدًا نَّبَذَهُ فَرِيقٌ مِّنْهُم...",
                           style: TextStyle(
-                            color: colors.background,
+                            color:const Color(0xFFE7E0D0),
                             fontSize: 18.sp,
                           ),
                           textAlign: TextAlign.right,
@@ -137,7 +137,7 @@ class _HomePageState extends State<HomePage> {
                 "المهام اليومية",
                 style: TextStyle(
                   fontFamily: 'Inter',
-                  color: colors.error,
+                  color:colors.primary,
                   fontWeight: FontWeight.bold,
                   fontSize: 18.sp,
                 ),
@@ -180,7 +180,7 @@ class _HomePageState extends State<HomePage> {
                 "الانشطة",
                 style: TextStyle(
                   fontFamily: 'Inter',
-                  color: colors.error,
+                  color: colors.primary,
                   fontWeight: FontWeight.bold,
                   fontSize: 18.sp,
                 ),
@@ -212,14 +212,14 @@ class _HomePageState extends State<HomePage> {
                       }
                     },
                     child: Card(
-                      color: colors.primary,
+                      color: colors.surface,
                       child: Center(
                         child: Text(
                           option,
                           style: TextStyle(
                             fontFamily: "B Fantezy",
-                            color: colors.background,
-                            fontSize: 30.sp,
+                            color: Color(0xFFE7E0D0),
+                            fontSize: 25.sp,
                           ),
                         ),
                       ),

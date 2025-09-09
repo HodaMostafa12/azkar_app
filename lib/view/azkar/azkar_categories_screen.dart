@@ -80,7 +80,7 @@ class _AzkarScreenState extends State<AzkarScreen> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Theme.of(context).colorScheme.error,
+          backgroundColor:Color(0xFFCB3526),
           child: const Icon(Icons.add, color: Colors.white,),
           onPressed: () {
             _showAddAzkarDialog(context, vm);
@@ -190,10 +190,10 @@ class _AzkarScreenState extends State<AzkarScreen> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25.0),
             border: Border.all(
-              color: const Color(0xFF162F43),
+              color: const Color(0xFF102231),
               width: 2,
             ),
-            color: const Color(0xFF162F43),
+            color: colors.surface,
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
