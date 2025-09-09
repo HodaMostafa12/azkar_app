@@ -103,7 +103,7 @@ class _PrayerTimeState extends State<PrayerTime> {
                       dayName,
                       style: TextStyle(
                         fontFamily: "Inter",
-                        color: colors.error,
+                        color: Color(0xFFCB3526),
                         fontWeight: FontWeight.bold,
                         fontSize: 25.sp,
                       ),
@@ -112,7 +112,7 @@ class _PrayerTimeState extends State<PrayerTime> {
                       onPressed: () {},
                       icon: Icon(
                         Icons.calendar_month_outlined,
-                        color: colors.error,
+                        color: Color(0xFFCB3526),
                         size: 40,
                       ),
                     ),
@@ -171,28 +171,31 @@ class _PrayerTimeState extends State<PrayerTime> {
                   "assets/icons/moon22.png" ];
                 return Padding(
                   padding:  EdgeInsets.only(right: 8.w,),
-                  child: Row(
-                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _buildPrayerTile(
-                        title: prayer.name,
-                        subtitle: formattedTime,
-                        iconWidget:Image.asset(slahAssets[index]),
-                      ),
-                      CustomCheckbox(
-                        value: index < _isCheckedList.length ? _isCheckedList[index] : false,
-                        onChanged: (newValue) {
-                          setState(() {
-                            _isCheckedList[index] = newValue!;
-                          });
-                          _saveCheckboxState(); // ✅ احفظ التغيير
-                        },
-                        activeColor: Colors.white, // ✅ خلفية بيضاء عند التفعيل
-                        checkColor: colors.secondary, // ✅ لون علامة الصح
-                        borderColor: colors.secondary,
-                        overlayColor: colors.secondary,
-                      ),
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10,),
+                    child: Row(
+                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _buildPrayerTile(
+                          title: prayer.name,
+                          subtitle: formattedTime,
+                          iconWidget:Image.asset(slahAssets[index]),
+                        ),
+                        CustomCheckbox(
+                          value: index < _isCheckedList.length ? _isCheckedList[index] : false,
+                          onChanged: (newValue) {
+                            setState(() {
+                              _isCheckedList[index] = newValue!;
+                            });
+                            _saveCheckboxState(); // ✅ احفظ التغيير
+                          },
+                          activeColor: Colors.white, // ✅ خلفية بيضاء عند التفعيل
+                          checkColor: colors.secondary, // ✅ لون علامة الصح
+                          borderColor: colors.secondary,
+                          overlayColor: colors.secondary,
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
@@ -212,7 +215,7 @@ class _PrayerTimeState extends State<PrayerTime> {
     return Container(
       margin: const EdgeInsets.all(8),
       height: 80.h,
-      width: 300.w,
+      width: 280.w,
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25.0),

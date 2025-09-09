@@ -61,7 +61,7 @@ class _AzkarDetailScreenState extends State<AzkarDetailScreen> {
                     child: Container(
                       padding: EdgeInsets.all(20.w),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF162F43),
+                        color:colors.surface,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Column(
@@ -80,12 +80,12 @@ class _AzkarDetailScreenState extends State<AzkarDetailScreen> {
                           GestureDetector(
                             onTap: () => _incrementZekr(index),
                             child: Container(
-                             // height: 100.h,
+                              height: 50.h,
                               width: double.infinity,
                               decoration: BoxDecoration(
                                 color: _currentCounts[index] == 0
                                     ? Colors.red.shade900
-                                    : colors.error,
+                                    : Color(0xFF2A6C69),
                                 borderRadius: BorderRadius.circular(15.r),
                               ),
                               child: Center(
@@ -94,7 +94,7 @@ class _AzkarDetailScreenState extends State<AzkarDetailScreen> {
                                   style: TextStyle(
                                     fontFamily: "Inter",
                                     color: Colors.white,
-                                    fontSize: 30.sp,
+                                    fontSize: 20.sp,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
