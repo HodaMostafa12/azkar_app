@@ -33,10 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
               /// ---- Logo ----
               Padding(
                 padding: EdgeInsets.only(top: 20.h, left: 70.w, right: 70.w),
-                child: Image.asset(
-                  isDark
-                      ? 'assets/images/logo_dark_1024.png'
-                      : 'assets/images/logo_light_1024 (2).png',
+                child: Image.asset('assets/images/logo_light_1024 (2).png',
                 ),
               ),
               SizedBox(
@@ -128,8 +125,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             width: double.infinity,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: colors.primary,
-                                foregroundColor: colors.onPrimary,
+                                backgroundColor:const Color(0xFF2A6C69),
+                                foregroundColor:const Color(0xFF2A6C69),
                                 padding:
                                 const EdgeInsets.symmetric(vertical: 14),
                                 shape: RoundedRectangleBorder(
@@ -180,6 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   : Text(
                                 "تسجيل الدخول",
                                 style: TextStyle(
+                                  color: Colors.white,
                                   fontSize: 25.sp,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -206,7 +204,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   "إنشاء حساب جديد",
                                   style: TextStyle(
                                     fontSize: 15.sp,
-                                    color: colors.error,
+                                    color:const Color(0xFFD91602),
                                     fontWeight: FontWeight.bold,
                                     decoration: TextDecoration.underline,
                                     decorationColor: colors.error,

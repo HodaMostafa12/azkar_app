@@ -29,7 +29,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final authViewModel = context.watch<AuthViewModel>();
     return Scaffold(
       backgroundColor: colors.background, // A dark background color.
-      appBar: CustomAppBar(title: "الاعدادات",showBackButton: false,),
+      appBar:const CustomAppBar(title: "الاعدادات",showBackButton: true,),
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(

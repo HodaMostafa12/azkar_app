@@ -40,12 +40,17 @@ class _ConstTextFieldState extends State<ConstTextField> {
       keyboardType: widget.keyboardType,
       textAlign: TextAlign.right,
       validator: widget.validator,
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 16.sp,
+      ),
       decoration: InputDecoration(
         hintText: widget.hintText,
         hintStyle: TextStyle(
           fontSize: 16.sp,
-          color: colors.secondary,
+          color: Colors.black38,
         ),
+
         filled: true,
         fillColor: Colors.white,
         contentPadding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 16.w),

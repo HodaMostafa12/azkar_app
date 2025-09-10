@@ -1,3 +1,4 @@
+import 'package:azkar_app/view/Settings/settings_screen.dart';
 import 'package:azkar_app/view/azkar/azkar_categories_screen.dart';
 import 'package:azkar_app/view/todo_screen/todo.dart';
 import 'package:flutter/material.dart';
@@ -49,14 +50,19 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         leading: Padding(
           padding: EdgeInsets.all(8.w),
-          child: CircleAvatar(
-            radius: 26.r,
-            backgroundColor: colors.primary,
-            child: Text(
-              (context.watch<AuthViewModel>().user?.username.isNotEmpty ?? false)
-                  ? context.watch<AuthViewModel>().user!.username[0].toUpperCase()
-                  : "?", // لو مفيش username يظهر علامة استفهام
-              style: TextStyle(color: colors.background, fontSize: 18.sp),
+          child: InkWell(
+            onTap: (){
+              Navigator.push(context,MaterialPageRoute(builder: (context)=>SettingsScreen()));
+            },
+            child: CircleAvatar(
+              radius: 26.r,
+              backgroundColor: colors.primary,
+              child: Text(
+                (context.watch<AuthViewModel>().user?.username.isNotEmpty ?? false)
+                    ? context.watch<AuthViewModel>().user!.username[0].toUpperCase()
+                    : "?", // لو مفيش username يظهر علامة استفهام
+                style: TextStyle(color: colors.background, fontSize: 18.sp),
+              ),
             ),
           ),
         ),

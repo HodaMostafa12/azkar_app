@@ -34,9 +34,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               /// Logo
               Padding(
                 padding: EdgeInsets.only(top: 20.h, left: 70.w, right: 70.w),
-                child: Image.asset(isDark
-                    ? 'assets/images/logo_dark_1024.png'
-                    : 'assets/images/logo_light_1024 (2).png'),
+                child: Image.asset(
+                     'assets/images/logo_light_1024 (2).png'),
                 //image changes in modes
               ),
 
@@ -131,8 +130,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: colors.primary,
-                            foregroundColor: colors.onPrimary,
+                            backgroundColor:const Color(0xFF2A6C69),
+                            foregroundColor:const Color(0xFF2A6C69),
                             padding: const EdgeInsets.symmetric(vertical: 14),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
@@ -177,6 +176,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: Text(
                             "انشاء حساب",
                             style: TextStyle(
+                              color: Colors.white,
                                 fontSize: 25.sp, fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -193,7 +193,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               "تسجيل دخول",
                               style: TextStyle(
                                 fontSize: 15.sp,
-                                color: colors.error,
+                                color:const Color(0xFFD91602),
                                 fontWeight: FontWeight.bold,
                                 decoration: TextDecoration.underline,
                                 decorationColor: colors.error,
@@ -205,7 +205,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             " لديك حساب بالفعل؟",
                             style: TextStyle(
                               fontSize: 15.sp,
-                              color: Colors.black,
+                              color: colors.primary,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
