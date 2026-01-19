@@ -14,31 +14,29 @@ class TodoViewModel extends ChangeNotifier {
   bool get isLoading => _loading;
   String? get error => _error;
 
-  /// 📌 نجيب الـ userId من Supabase مباشرة
-  String? get _currentUserId =>
-      Supabase.instance.client.auth.currentUser?.id;
+  String? get _currentUserId => Supabase.instance.client.auth.currentUser?.id;
 
-  // جلب المهام الخاصة بالمستخدم الحالي فقط
   Future<void> loadTodos() async {
-    if (_currentUserId == null) return; // المستخدم مش لوج إن
+    if (_currentUserId == null) return;
     _loading = true;
     notifyListeners();
+
     try {
       _todos = await _repo.fetchTodos(_currentUserId!);
     } catch (e) {
       _error = e.toString();
     }
+
     _loading = false;
     notifyListeners();
   }
 
-  // إضافة مهمة جديدة للمستخدم الحالي
   Future<void> addTask(String task, DateTime date) async {
-    if (_currentUserId == null) return; // المستخدم مش لوج إن
+    if (_currentUserId == null) return;
     try {
       final newTask = await _repo.addTodo(_currentUserId!, task, date);
       if (newTask != null) {
-        _todos.insert(0, newTask); // إضافة المهمة فورًا في القائمة
+        _todos.insert(0, newTask);
         notifyListeners();
       }
     } catch (e) {
@@ -47,12 +45,47 @@ class TodoViewModel extends ChangeNotifier {
     }
   }
 
-  // تغيير حالة المهمة الخاصة بالمستخدم الحالي
-  Future<void> toggleTodo(
-      String id, bool isDone, DateTime taskDate) async {
-    if (_currentUserId == null) return; // المستخدم مش لوج إن
+  Future<void> deleteTask(String id) async {
+    if(_currentUserId == null ) return;
 
-    // السماح بتعديل المهام اليوم فقط
+    try {
+      await _repo.deleteTodo(id);
+      _todos.removeWhere((todo) => todo.id == id);
+      notifyListeners();
+    } catch (e) {
+      _error = e.toString();
+      notifyListeners();
+    }
+  }
+
+  Future<void> editTask(String id, String title) async{
+    if(_currentUserId == null) return;
+    try{
+      await _repo.editTodo(id, title);
+      final index = _todos.indexWhere((todo) => todo.id == id);
+      if(index != -1){
+        final updated = _todos[index];
+        _todos[index] = TodoModel(
+          id: updated.id,
+          title: title,
+          isComplated: updated.isComplated,
+          taskDate: updated.taskDate,
+          createdAt: updated.createdAt,
+          userId: updated.userId,
+        );
+        notifyListeners();
+      }
+    }catch(e){
+      _error = e.toString();
+      notifyListeners();
+    }
+  }
+
+
+
+  Future<void> toggleTodo(String id, bool isDone, DateTime taskDate) async {
+    if (_currentUserId == null) return;
+
     if (taskDate.day != DateTime.now().day ||
         taskDate.month != DateTime.now().month ||
         taskDate.year != DateTime.now().year) {
@@ -61,15 +94,16 @@ class TodoViewModel extends ChangeNotifier {
 
     try {
       await _repo.toggleTodo(id, isDone);
-      // تحديث المهمة محليًا بدل إعادة تحميل كل المهام
       final index = _todos.indexWhere((todo) => todo.id == id);
       if (index != -1) {
+        final updated = _todos[index];
         _todos[index] = TodoModel(
-          id: _todos[index].id,
-          title: _todos[index].title,
+          id: updated.id,
+          title: updated.title,
           isComplated: isDone,
-          taskDate: _todos[index].taskDate,
-          createdAt: _todos[index].createdAt,
+          taskDate: updated.taskDate,
+          createdAt: updated.createdAt,
+          userId: updated.userId,
         );
         notifyListeners();
       }

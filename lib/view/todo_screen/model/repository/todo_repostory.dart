@@ -4,17 +4,18 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class TodoRepo {
   final SupabaseClient _client = Supabase.instance.client;
 
-  // جلب المهام الخاصة بالمستخدم فقط
   Future<List<TodoModel>> fetchTodos(String uid) async {
     final response = await _client
         .from('todos')
         .select()
         .eq('user_id', uid)
         .order('task_date', ascending: false);
-    return (response as List).map((json) => TodoModel.fromJson(json)).toList();
+
+    return (response as List)
+        .map((json) => TodoModel.fromJson(json))
+        .toList();
   }
 
-  // إضافة مهمة جديدة مرتبطة بالمستخدم
   Future<TodoModel?> addTodo(String uId, String task, DateTime date) async {
     final response = await _client.from('todos').insert({
       'user_id': uId,
@@ -29,8 +30,24 @@ class TodoRepo {
     return null;
   }
 
-  // تغيير حالة المهمة
+  Future<void> deleteTodo(String id) async {
+    await _client
+        .from('todos')
+        .delete()
+        .eq('id', id);
+  }
+
+
+  Future<void> editTodo(String id, String title) async {
+    await _client.from('todos')
+        .update({'title': title})
+        .eq('id', id);
+  }
+
   Future<void> toggleTodo(String id, bool isDone) async {
-    await _client.from('todos').update({'is_completed': isDone}).eq('id', id);
+    await _client
+        .from('todos')
+        .update({'is_completed': isDone})
+        .eq('id', id);
   }
 }

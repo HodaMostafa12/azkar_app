@@ -2,7 +2,7 @@
     package="com.example.azkar_app">
 
     <application
-        android:label="azkar_app"
+        android:label="Fzkr"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
