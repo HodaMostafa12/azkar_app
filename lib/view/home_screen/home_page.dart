@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../Authentication/view_model/auth_viewModel.dart';
 
 import '../Pray_Time/praying_time.dart';
+import '../Quran/quran.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   final Map<String, Widget> screenMap = {
     "الاذكار": AzkarScreen(), // هنا حطي شاشة الأذكار
     "مواقيت الصلاة": PrayerTime(),
-    "المصحف": PrayerTime(), // هنا حطي شاشة المصحف
+    "المصحف":Quran(), // هنا حطي شاشة المصحف
     "القبلة": PrayerTime(), // هنا حطي شاشة القبلة
     "المهام اليومية": PrayerTime(), // هنا حطي شاشة المهام
   };

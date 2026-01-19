@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../Quran/Repository/Quran-Model/quran-model.dart';
-import '../../Quran/recitation.dart';
-import '../Listen/listening.dart';
+import 'Repository/Quran-Model/quran-model.dart';
+import 'recitation.dart';
+import 'listening.dart';
 
 class Option extends StatelessWidget {
   final Surah surah;
@@ -18,6 +18,7 @@ class Option extends StatelessWidget {
     return Scaffold(
       backgroundColor: colors.background,
       appBar: AppBar(
+        backgroundColor: colors.background,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);

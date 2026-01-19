@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../utils/appbar.dart';
-import '../../Quran/Repository/Quran-Model/quran-model.dart';
+import '../../utils/appbar.dart';
+import 'Repository/Quran-Model/quran-model.dart';
 
 class Listening extends StatelessWidget {
   // Add a final Surah object to receive the data

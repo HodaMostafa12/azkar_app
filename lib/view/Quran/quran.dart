@@ -1,3 +1,4 @@
+import 'package:azkar_app/view/Quran/options.dart';
 import 'package:azkar_app/view/Quran/recitation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,8 +32,8 @@ class Quran extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Image.asset(
                     "assets/images/Quran.png",
-                    height: 200,
-                    width: 365,
+                    // height: 200,
+                    // width: 365,
                   ),
                 ),
                 Expanded(
@@ -53,7 +54,7 @@ class Quran extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => Telawa(surah: surah), // pass actual Surah
+                              builder: (_) => Option(surah: surah), // pass actual Surah
                             ),
                           );
 
@@ -69,10 +70,10 @@ class Quran extends StatelessWidget {
                               ),
                               Text(
                                 surah.number.toString(),
-                                style: const TextStyle(
+                                style:  TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14,
-                                  color: Colors.white,
+                                  color: colors.primary,
                                 ),
                               ),
                             ],
@@ -83,8 +84,8 @@ class Quran extends StatelessWidget {
                               Expanded(
                                 child: Text(
                                   surah.englishName,
-                                  style: const TextStyle(
-                                    color: Colors.white,
+                                  style:  TextStyle(
+                                    color:colors.primary,
                                     fontSize: 20,
                                   ),
                                   textAlign: TextAlign.left,
@@ -94,8 +95,8 @@ class Quran extends StatelessWidget {
                               Expanded(
                                 child: Text(
                                   surah.name,
-                                  style: const TextStyle(
-                                    color: Colors.white,
+                                  style:  TextStyle(
+                                    color: colors.primary,
                                     fontSize: 20,
                                   ),
                                   textAlign: TextAlign.right,
