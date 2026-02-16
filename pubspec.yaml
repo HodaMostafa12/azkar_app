@@ -45,6 +45,9 @@ dependencies:
   adhan: ^2.0.0+1
   table_calendar: ^3.2.0
   hijri: ^3.0.0
+  cached_network_image: ^3.3.0
+  connectivity_plus: ^5.0.2
+  page_flip: ^0.2.5+1
 
 dev_dependencies:
   flutter_native_splash: ^2.4.0
@@ -98,5 +101,9 @@ flutter:
     - family: B Fantezy
       fonts:
         - asset: assets/fonts/bfantezy/B-Fantezy.ttf
+
+    - family: Quran
+      fonts:
+         - asset: assets/fonts/quran/quran2.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
