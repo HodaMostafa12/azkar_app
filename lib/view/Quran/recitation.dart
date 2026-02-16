@@ -264,6 +264,7 @@ class _TelawaState extends State<Telawa> {
               color:  Color(0xFF2A6C69),
               size: 32
           ),
+          //
           Text(
             toArabicNumbers(number),
             style:  TextStyle(
